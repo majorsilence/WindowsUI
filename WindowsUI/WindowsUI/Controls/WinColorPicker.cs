@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using Majorsilence.Forms;
 using System.Drawing;
+using Majorsilence.Forms.Drawing;
 using System.ComponentModel;
 
 namespace WindowsUI.Controls
@@ -51,7 +52,7 @@ namespace WindowsUI.Controls
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            e.Graphics.SmoothingMode = Majorsilence.Forms.Drawing.Drawing2D.SmoothingMode.HighQuality;
             e.Graphics.FillEllipse(new SolidBrush(Color.FromArgb(128, Normal)), new RectangleF(0, 0, Width -1, Height - 1));
         }
 

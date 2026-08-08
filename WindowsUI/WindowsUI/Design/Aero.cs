@@ -10,7 +10,9 @@ namespace WindowsUI.Design
     {
         public static void ChangeAccent(IntPtr HWnd, Enums.AccentPolicy accent, bool hasFrame = true)
         {
-            if (Environment.OSVersion.Version.Major >= 6)
+            // user32.dll only exists on Windows; on other platforms the accent/blur effect is
+            // simply unavailable (the Majorsilence.Forms backend draws the window itself).
+            if (OperatingSystem.IsWindows() && Environment.OSVersion.Version.Major >= 6)
             {
                 if (hasFrame)
                     accent.AccentFlags = 0x20 | 0x40 | 0x80 | 0x100;

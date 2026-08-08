@@ -1,11 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Text;
+using Majorsilence.Forms.Drawing;
+using Majorsilence.Forms.Drawing.Text;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
+using Majorsilence.Forms;
 using WindowsUI.Design;
 
 namespace WindowsUI
@@ -360,8 +361,8 @@ namespace WindowsUI
         void SizerMouseDown(object sender, MouseEventArgs e)
         {
             mov = true;
-            My = MousePosition.Y;
-            Mx = MousePosition.X;
+            My = Cursor.Position.Y;
+            Mx = Cursor.Position.X;
             Sw = Width;
             Sh = Height;
         }
@@ -373,8 +374,8 @@ namespace WindowsUI
             {
                 Aero.ChangeAccent(Handle, new Enums.AccentPolicy { GradientColor = 0xFD70000, AccentState = Enums.AccentState.ACCENT_DISABLED });
                 this.Opacity = 0.85;
-                int t_width = MousePosition.X - Mx + Sw;
-                int t_height = MousePosition.Y - My + Sh;
+                int t_width = Cursor.Position.X - Mx + Sw;
+                int t_height = Cursor.Position.Y - My + Sh;
                 if(t_width >= MinWidth)
                 {
                     Width = t_width;
@@ -426,7 +427,9 @@ namespace WindowsUI
                 this.Location = new Point(
                     (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
 
-                this.Update();
+                // Majorsilence.Forms' Form has no Update(); Refresh() is the equivalent
+                // immediate repaint (WinForms' Refresh() is Invalidate(true) + Update()).
+                this.Refresh();
             }
         }
 

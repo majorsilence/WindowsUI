@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Drawing.Drawing2D;
+using Majorsilence.Forms.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using Majorsilence.Forms;
 
 namespace WindowsUI.Controls
 {
@@ -27,9 +27,9 @@ namespace WindowsUI.Controls
             base.OnPaint(pe);
             GraphicsPath path = new GraphicsPath();
             path.AddEllipse(0, 0, this.Width - 1, this.Height - 1);
-            this.Region = new System.Drawing.Region(path);
+            this.Region = new Majorsilence.Forms.Drawing.Region(path);
             pe.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            pe.Graphics.DrawEllipse(new System.Drawing.Pen(this.BackColor), 0, 0, this.Width - 1, this.Height - 1);
+            pe.Graphics.DrawEllipse(new Majorsilence.Forms.Drawing.Pen(this.BackColor), 0, 0, this.Width - 1, this.Height - 1);
             pe.Dispose();
         }
     }

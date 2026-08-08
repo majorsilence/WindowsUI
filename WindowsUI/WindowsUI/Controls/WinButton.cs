@@ -1,11 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Text;
+using Majorsilence.Forms.Drawing;
+using Majorsilence.Forms.Drawing.Text;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
+using Majorsilence.Forms;
 
 namespace WindowsUI
 {

@@ -13,7 +13,10 @@ namespace WindowsUI
     {
         public static string GetMicrosoftAccount(SecurityIdentifier sid)
         {
-            if (sid == null) return null;
+            // The registry, NTAccount translation and the shell32 picture-path entry points below
+            // are all Windows-only: off Windows they throw (PlatformNotSupportedException /
+            // DllNotFoundException), so every entry point returns null instead.
+            if (sid == null || !OperatingSystem.IsWindows()) return null;
             using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, Environment.Is64BitOperatingSystem ? RegistryView.Registry64 : RegistryView.Registry32))
             {
                 var path = $"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\Credential Providers\\{{D6886603-9D2F-4EB2-B667-1971041FA96B}}\\{sid.Value}\\UserNames";
@@ -27,6 +30,7 @@ namespace WindowsUI
 
         public static SecurityIdentifier GetSecurityIdentifier(string userName, bool stripDomain = false)
         {
+            if (!OperatingSystem.IsWindows()) return null;
             if (stripDomain)
             {
                 var p = userName.IndexOf('\\');
@@ -59,6 +63,7 @@ namespace WindowsUI
 
         public static string GetUserPicturePath(string userName = null)
         {
+            if (!OperatingSystem.IsWindows()) return null;
             if (userName == null) userName = Environment.UserName;
             var msAccountName = GetMicrosoftAccount(userName);
             var pathBuffer = new StringBuilder(1024);
@@ -67,6 +72,8 @@ namespace WindowsUI
         }
         public static string GetUserPicturePath(string userName, out string srcPath)
         {
+            srcPath = null;
+            if (!OperatingSystem.IsWindows()) return null;
             var msAccountName = GetMicrosoftAccount(userName);
             var pathBuffer = new StringBuilder(1024);
             var srcBuffer = new StringBuilder(1024);

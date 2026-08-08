@@ -1,13 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
+using Majorsilence.Forms.Drawing;
+using Majorsilence.Forms.Drawing.Drawing2D;
+using Majorsilence.Forms.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using Majorsilence.Forms;
 
 namespace WindowsUI.Controls
 {
@@ -49,8 +50,8 @@ namespace WindowsUI.Controls
             Rectangle rec = e.ClipRectangle;
 
             rec.Width = (int)(rec.Width * ((double)Value / Maximum)) - 2;
-            if (ProgressBarRenderer.IsSupported)
-                ProgressBarRenderer.DrawHorizontalBar(e.Graphics, e.ClipRectangle);
+            // No Majorsilence.Forms equivalent of WinForms' visual-styles ProgressBarRenderer.
+            // Nothing is lost visually: the FillRectangle below painted over this bar anyway.
             rec.Height = rec.Height - 2;
             e.Graphics.FillRectangle(new SolidBrush(Normal), this.ClientRectangle);
             e.Graphics.DrawRectangle(new Pen(Color.FromArgb(200, Border)), 0, 0, Width - 1, Height - 1);

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+using System.Drawing;
+using ColorTranslator = Majorsilence.Forms.ColorTranslator;
 
 namespace WindowsUI
 {

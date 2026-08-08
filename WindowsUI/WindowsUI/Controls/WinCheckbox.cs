@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Text;
+using Majorsilence.Forms.Drawing;
+using Majorsilence.Forms.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using Majorsilence.Forms;
 
 namespace WindowsUI.Controls
 {
@@ -85,7 +86,9 @@ namespace WindowsUI.Controls
             }
         }
 
-        protected override void OnClick(EventArgs e)
+        // Majorsilence.Forms declares Control.OnClick as OnClick(MouseEventArgs) rather than
+        // WinForms' OnClick(EventArgs); the parameter is only forwarded as EventArgs below.
+        protected override void OnClick(MouseEventArgs e)
         {
             base.OnClick(e);
             Checked = !Checked;
